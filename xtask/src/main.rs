@@ -21,6 +21,10 @@ enum CompileMode {
     Release,
 }
 
+// const KERNEL: &'static str = "test-kernel.bin";
+const KERNEL: &'static str =
+    "/home/dama/Projects/LinuxBoot/linuxboot/mainboards/qemu/riscv64/flashkernel";
+
 fn main() {
     let matches = clap_app!(xtask =>
         (version: crate_version!())
@@ -215,7 +219,7 @@ fn xtask_qemu_run(xtask_env: &XtaskEnv) {
         .current_dir(dist_dir(xtask_env))
         .args(&["-machine", "virt"])
         .args(&["-bios", "rustsbi-qemu.bin"])
-        .args(&["-kernel", "test-kernel.bin"])
+        .args(&["-kernel", KERNEL])
         .args(&["-smp", "8"]) // 8 cores
         .arg("-nographic")
         .status()
